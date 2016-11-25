@@ -17,7 +17,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views
 
-from sistema.views import index
+from posts.views import index
 
 urlpatterns = [
     # Sistema
