@@ -1,0 +1,18 @@
+{% extends 'base-sem-nav.html' %}
+{% block title %}Projeto Miniblog{% endblock %}
+{% block logo %}Projeto Miniblog{% endblock %}
+{% block content %}
+		<form action="{% url 'login' %}" method="post"> {% csrf_token %}
+			<div class="input-field">
+				<label for="id_username">Usuário</label>
+				<input class="validate" id="id_username" type="text" name="username" value="{{ current_name }}">
+			</div>
+			<div class="input-field">
+				<label for="id_senha">Senha</label>
+				<input id="id_senha" type="password" name="password" value="{{ current_name }}">
+			</div>
+			<button class="waves-effect waves-light btn-large" type="submit" value="Fazer Login"><i class="material-icons left">perm_identity</i>fazer login</button>
+			<div class="section">
+			<a class="btn-flat" href="{% url 'criar_autor' %}"><i class="material-icons left">add</i>nova conta</a></div>
+		</form>
+{% endblock content %}

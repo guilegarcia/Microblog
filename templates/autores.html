@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Quem seguir?{% endblock %}
+{% block logo %}Quem seguir?{% endblock %}
+{% block content %}
+    {% for autor in autores %}
+        <div class="card horizontal">
+            <div class="card-image">
+                <img src="http://3.bp.blogspot.com/-p4JvM7rWNG4/T6ZcU5eKqTI/AAAAAAAACGM/K0DB35A5brE/s1600/facebook.gif"
+                     alt="">
+            </div>
+            <div class="card-stacked">
+                <div class="card-content">
+                    <div class="card-title"><a
+                            href="{% url 'autor' autor.pk %}">{{ autor.first_name }} {{ autor.last_name }}</a></div>
+
+                    {% if autor in request.user.seguindo.all %}
+                        <a class="btn" href="{% url 'unfollow' autor.pk %}">unfollow</a>
+                    {% else %}
+                        <a class="btn" href="{% url 'seguir_autor' autor.pk %}">seguir</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    {% empty %}
+        <p>Não há autores cadastrados!</p>
+    {% endfor autores %}
+
+{% endblock %}

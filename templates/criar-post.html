@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Criar post{% endblock %}
+{% block logo %}Criar post{% endblock %}
+{% block content %}
+    <form action="{% url 'criar_post' %}" method="post">{% csrf_token %}
+        <div class="input-field">
+            {# {{ form }} #}
+
+            <label for="novo_post">Digite seu post</label>
+            <textarea name="texto" class="materialize-textarea"></textarea>
+            <input class="btn" type="submit" value="Salvar post"/>
+        </div>
+    </form>
+{% endblock %}

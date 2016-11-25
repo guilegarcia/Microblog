@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/main.css" %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="{% static "js/jquery.min.js" %}"></script>
+    <script src="{% static "js/materialize.min.js" %}"></script>
+    <script src="{% static "js/init.js" %}"></script>
+</head>
+<body>
+
+<!-- Dropdown -->
+<ul id="mais_categorias" class="dropdown-content">
+    <li><a href="{% url 'excluir_autor' request.user.pk %}"><i class="material-icons left">not_interested</i>Excluir</a></li>
+    <li><a href="{% url 'logout' %}"><i class="material-icons left">power_settings_new</i>Sair</a></li>
+</ul>
+<!--fim Dropdown-->
+
+<nav class="teal darken-4">
+    <div class="nav-wrapper container">
+        <a href="#!" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
+{#        <a class="brand-logo center">Microblog</a>#}
+        <a id="logo-container" href="#" class="brand-logo">Microblog</a>
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <a class="btn hide-on-med-and-down" href="{% url 'criar_post' %}">
+                    novo post</a>
+            </li>
+            <li><a href="{% url 'index' %}"><i class="material-icons left">reorder</i>Timeline</a></li>
+            <li><a href="{% url 'autores' %}"><i class="material-icons left">supervisor_account</i>Quem seguir?</a></li>
+            <li><a class="dropdown-button" href="#" data-activates="mais_categorias"><i class="material-icons left">perm_identity</i>{{ request.user.first_name }}<i
+                    class="material-icons right">arrow_drop_down</i></a></li>
+        </ul>
+
+        <ul class="side-nav" id="mobile-menu">
+            <li>
+                <a class="btn hide-on-med-and-down" href="{% url 'criar_post' %}">
+                    novo post</a>
+            </li>
+
+            <li><a href="{% url 'index' %}"><i class="material-icons left">reorder</i>Timeline</a></li>
+            <li><a href="{% url 'autores' %}"><i class="material-icons left">supervisor_account</i>Quem seguir?</a></li>
+            <li class="divider"></li>
+            <li><a href="{% url 'excluir_autor' request.user.pk %}"><i class="material-icons left">not_interested</i>Excluir
+                esta conta</a></li>
+            <li class="divider"></li>
+            <li><a href="{% url 'logout' %}"><i class="material-icons left">power_settings_new</i>Sair</a></li>
+
+        </ul>
+    </div>
+</nav>
+<div class="fixed-action-btn hide-on-large-only">
+    <a class="btn-floating btn-large waves-effect waves-light teal" href="{% url 'criar_post' %}"><i
+            class="material-icons">add</i></a></div>
+<div class="container">
+    <div class="row">
+        <div class="col s12 m6 offset-m3">
+            <h1>
+                {% block logo %}{% endblock logo %}
+            </h1>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+</body>
+</html>

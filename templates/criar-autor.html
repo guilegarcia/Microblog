@@ -1,0 +1,23 @@
+{% extends 'base-sem-nav.html' %}
+{% block logo %}
+    Criar conta
+{% endblock logo %}
+{% block title %}
+    Criar conta
+{% endblock title %}
+{% block content %}
+    <div class="center-align">
+        <form action="{% url 'criar_autor' %}" method="post">{% csrf_token %}
+            {% for field in form %}
+                <div class="input-field">
+                    {{ field.errors }}
+                    {{ field.label_tag }}
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn-large" value="Salvar usuario"><i class="material-icons left">add</i>Cadastrar</button>
+        </form>
+        <div class="section">
+        <a href="{% url 'login' %}" class="btn-flat"><i class="left material-icons">perm_identity</i>Fazer login</a></div>
+    </div>
+{% endblock %}
