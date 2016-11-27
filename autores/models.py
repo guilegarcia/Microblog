@@ -15,7 +15,7 @@ from django.db import models
 
 class Autor(AbstractUser):  # Herda do usuário comum do Django
     seguindo = models.ManyToManyField('self', blank=True)
-    foto = models.ImageField(null=True, blank=True)
+    biografia = models.TextField(blank=True, null=True)
 
 
 

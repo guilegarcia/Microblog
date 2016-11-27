@@ -2,8 +2,8 @@
 from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import CreateView
-from django.views.generic.list import ListView
 
+from posts.models import Post
 from .models import Autor
 
 
@@ -74,4 +74,5 @@ def autor(request, id=None):
     Recebe o autor pelo id e envia para a página autor.html
     """
     autor = get_object_or_404(Autor, id=id)
-    return render(request, 'autor.html', {'autor': autor})
+    posts = Post.objects.filter(autor=autor)
+    return render(request, 'autor.html', {'autor': autor, 'posts': posts})

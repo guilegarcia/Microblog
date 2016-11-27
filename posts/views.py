@@ -4,8 +4,8 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import CreateView
 
-from autores.models import Autor
 from .models import Post
+
 
 class CriarPost(CreateView):
     model = Post
@@ -23,13 +23,13 @@ class CriarPost(CreateView):
         return super(CriarPost, self).form_valid(form)
 
 
-def excluir_post(request, id=None):
-    """
-    Recebe o id do Post e exclui
-    """
-    post = get_object_or_404(Post, id=id)
-    post.delete()
-    return redirect('index')
+# def excluir_post(request, id=None):
+#     """
+#     Recebe o id do Post e exclui
+#     """
+#     post = get_object_or_404(Post, id=id)
+#     post.delete()
+#     return redirect('index')
 
 
 @login_required
@@ -42,3 +42,10 @@ def index(request):
         posts = None
     return render(request, 'index.html', {'posts': posts})
 
+
+@login_required
+def curtir(request, id=None):
+    post = get_object_or_404(Post, id=id)
+    post.likes += 1
+    post.save()
+    return redirect('.')

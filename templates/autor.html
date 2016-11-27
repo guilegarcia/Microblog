@@ -7,5 +7,10 @@
 <body>
 {{ autor.first_name }} {{ autor.last_name }}
 {{ autor.email }}
+
+<h2>posts</h2>
+{% for post in posts %}
+    {{ post.texto }}
+{% endfor %}
 </body>
 </html>
