@@ -1,16 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Autor {{ autor.first_name }}</title>
-</head>
-<body>
-{{ autor.first_name }} {{ autor.last_name }}
-{{ autor.email }}
-
-<h2>posts</h2>
+{% extends 'base.html' %}
+{% block logo %}
+  {{ autor.first_name }} {{ autor.last_name }}
+{% endblock logo %}
+{% block title %}
+  {{ autor.first_name }} {{ autor.last_name }}
+{% endblock title %}
+{% block content %}
+<a class="chip" href="mailto:{{ autor.email }}">{{ autor.email }}</a>
+<p>
+  {{autor.biografia}}
+</p>
 {% for post in posts %}
-    {{ post.texto }}
-{% endfor %}
-</body>
-</html>
+<div class="card">
+	<div class="card-stacked">
+
+		<div class="card-content">
+			<span class="card-title">
+				{{ post.texto }}
+			</span>
+		</div>
+		<div class="card-action">
+			<span>
+			escirto por <a href="#" title="">{{ post.autor.username }}</a>
+		 </span>
+
+			<a class="right-align" href="{% url 'curtir_post' post.pk %}">
+				<span class="chip right">
+					<i class="left close material-icons">thumb_up</i>{{ post.likes|default_if_none:0 }} curtidas
+				</span>
+			</a>
+		</div>
+	</div>
+</div>
+{% empty %}
+<p>Não há posts para exibir!</p>
+{% endfor posts %}
+{% endblock %}

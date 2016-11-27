@@ -9,18 +9,18 @@ from .models import Post
 
 class CriarPost(CreateView):
     model = Post
-    fields = ['texto']
+    fields = ['texto', 'autor']
     template_name = 'criar-post.html'
     success_url = '.'
 
-    def form_valid(self, form): # TODO inserir o autor diretamente no <form {{request.user }}
-        """
-        Adiciona o usuário logado como autor do Post
-        """
-        post = form.save(commit=False)
-        post.autor = self.request.user
-        post.save()
-        return super(CriarPost, self).form_valid(form)
+    # def form_valid(self, form):
+    #     """
+    #     Adiciona o usuário logado como autor do Post
+    #     """
+    #     post = form.save(commit=False)
+    #     post.autor = self.request.user
+    #     post.save()
+    #     return super(CriarPost, self).form_valid(form)
 
 
 # def excluir_post(request, id=None):
@@ -46,6 +46,13 @@ def index(request):
 @login_required
 def curtir(request, id=None):
     post = get_object_or_404(Post, id=id)
-    post.likes += 1
+    # Verifica se likes existe (não da pra somar None com int)
+    if post.likes:
+        post.likes += 1
+    else:
+        post.likes = 1
+    # Salva no banco de dados
     post.save()
-    return redirect('.')
+
+    # request.META.get('HTTP_REFERER') mostra de onde veio a requisição (index ou autor)
+    return redirect(request.META.get('HTTP_REFERER'))

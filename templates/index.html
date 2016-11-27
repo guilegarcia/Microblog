@@ -3,13 +3,25 @@
 {%block logo%}Timeline{%endblock%}
 {%block content%}
 {% for post in posts %}
-<div class="card horizontal">
-	<div class="card-image">
-		<img src="http://3.bp.blogspot.com/-p4JvM7rWNG4/T6ZcU5eKqTI/AAAAAAAACGM/K0DB35A5brE/s1600/facebook.gif" alt=""> <!-- TODO substituir por arquivos off -->
-	</div>
+<div class="card">
 	<div class="card-stacked">
-		<div class="card-content">{{ post.texto }}</div>
-		<div class="card-action">por <a href="#" title="">{{ post.autor.username }}</a></div>
+
+		<div class="card-content">
+			<span class="card-title">
+				{{ post.texto }}
+			</span>
+		</div>
+		<div class="card-action">
+			<span>
+			escirto por <a href="{% url 'autor' post.autor.id %}">{{ post.autor.username }}</a>
+		 </span>
+
+			<a class="right-align" href="{% url 'curtir_post' post.pk %}">
+				<span class="chip right">
+					<i class="left close material-icons">thumb_up</i>{{ post.likes|default_if_none:0 }} curtidas
+				</span>
+			</a>
+		</div>
 	</div>
 </div>
 {% empty %}

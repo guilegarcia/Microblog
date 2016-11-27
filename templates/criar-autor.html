@@ -8,16 +8,40 @@
 {% block content %}
     <div class="center-align">
         <form action="{% url 'criar_autor' %}" method="post">{% csrf_token %}
-            {% for field in form %}
-                <div class="input-field">
-                    {{ field.errors }}
-                    {{ field.label_tag }}
-                    {{ field }}
-                </div>
-            {% endfor %}
-            <button type="submit" class="btn-large" value="Salvar usuario"><i class="material-icons left">add</i>Cadastrar</button>
+            <div class="input-field">
+                <label for="id_first_name" class="">Primeiro nome:</label>
+                <input id="id_first_name" maxlength="30" name="first_name" type="text">
+            </div>
+
+            <div class="input-field">
+                <label for="id_last_name">Sobrenome:</label>
+                <input id="id_last_name" maxlength="30" name="last_name" type="text">
+            </div>
+
+            <div class="input-field">
+                <label for="id_email">Endereço de email:</label>
+                <input id="id_email" maxlength="254" name="email" type="email">
+            </div>
+
+            <div class="input-field">
+                <label for="biografia">Biografia:</label>
+                <textarea name="biografia" class="materialize-textarea"></textarea>
+            </div>
+
+            <div class="input-field">
+                <label for="id_username">Usuário:</label>
+                <input id="id_username" maxlength="150" name="username" type="text" required="">
+            </div>
+
+            <div class="input-field">
+                <label for="id_password">Senha:</label>
+                <input id="id_password" maxlength="128" name="password" type="password" required="">
+            </div>
+            <button type="submit" class="btn-large" value="Salvar usuario"><i class="material-icons left">add</i>Cadastrar
+            </button>
         </form>
         <div class="section">
-        <a href="{% url 'login' %}" class="btn-flat"><i class="left material-icons">perm_identity</i>Fazer login</a></div>
+            <a href="{% url 'login' %}" class="btn-flat"><i class="left material-icons">perm_identity</i>Fazer login</a>
+        </div>
     </div>
 {% endblock %}
