@@ -31,7 +31,6 @@ class CriarPost(CreateView):
 #     post.delete()
 #     return redirect('index')
 
-
 @login_required
 def index(request):
     autor = request.user
